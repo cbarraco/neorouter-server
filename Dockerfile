@@ -11,14 +11,17 @@ ARG VERSION=2.3.1.4360
 
 RUN mkdir /data
 
+VOLUME /data
+
 RUN apt-get update && apt-get install -y wget
 
 RUN wget http://download.neorouter.com/Downloads/NRFree/Update_$VERSION/Linux/Ubuntu/nrserver-$VERSION-free-ubuntu-amd64.deb && \
-	dpkg -i nrserver-$VERSION-free-ubuntu-amd64.deb && \
-	mv /usr/local/ZebraNetworkSystems/NeoRouter/* /data/
+	dpkg -i nrserver-$VERSION-free-ubuntu-amd64.deb 
 
-ENTRYPOINT /usr/bin/nrserver -run --dbroot /data/
+ADD init.sh /usr/local/bin/
+
+RUN chmod +x /usr/local/bin/init.sh
+
+ENTRYPOINT /usr/local/bin/init.sh
 
 EXPOSE 32976/tcp
-
-VOLUME /data/
