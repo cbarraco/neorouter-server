@@ -7,7 +7,7 @@ LABEL description="A neorouter server image based on the latest Ubuntu"
 ENV LANG=en_US.utf8
 ENV DEBIAN_FRONTEND=noninteractive
 
-ARG VERSION=2.3.1.4360
+ARG VERSION=2.3.2.4450
 
 RUN mkdir /data
 
